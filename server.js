@@ -3,15 +3,19 @@ const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+
+require('dotenv').config(); // To use environment variables from a .env file
+
 const app = express();
-const port = process.env.PORT || 55532;
+const port = process.env.PORT || 5000;
 
 // MySQL database connection
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'your_mysql_username',
-  password: 'your_mysql_password',
-  database: 'todo_list'
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  port: process.env.MYSQL_PORT,
 });
 
 db.connect(err => {
